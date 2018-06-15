@@ -12,5 +12,16 @@ function form_submit() {
         extended: false
     });
 
-    app.use('/index')
+    app.use(express.static('public'));
+
+    app.get('index.html', function (req, res) {
+        res.sendFile(__dirname + '/' + index.html);
+    })
+
+    app.post('/process_post', urlencodedParser, function (req, res) {
+        var response = {
+            names: req.body.names,
+            passwords: req.body.passwords
+        }
+    })
 }
